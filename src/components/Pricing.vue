@@ -131,6 +131,7 @@ export default defineComponent({
                     <img
                         src="../assets/images/icon-check.svg"
                         :class="style['pricing__summary-item--icon']"
+						alt="icon check"
                     />
                     <span :class="style['pricing__summary-item--text']">
                         {{ item }}

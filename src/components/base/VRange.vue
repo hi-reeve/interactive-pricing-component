@@ -63,6 +63,9 @@ export default defineComponent({
             @input="handleInput($event)"
             ref="inputRange"
             :value="modelValue"
+			aria-label=""
+			title="pricing"
+			aria-labelledby=""
         />
         <div :class="style.range">
             <div
