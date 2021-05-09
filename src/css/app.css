@@ -11,8 +11,8 @@
         --pale-blue: hsl(226, 100%, 87%);
         --white: hsl(0, 0%, 100%);
         --very-pale-blue: hsl(230, 100%, 99%);
-        --light-gray-blue: hsl(224, 65%, 95%);
-        --light-gray-blue-2: hsl(223, 50%, 87%);
+        --light-gray-blue: hsl(223, 50%, 87%);
+        --light-gray-blue-2: hsl(224, 65%, 95%);
         --gray-blue: hsl(225, 20%, 60%);
         --dark-blue: hsl(227, 35%, 25%);
     }
