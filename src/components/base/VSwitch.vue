@@ -39,7 +39,7 @@ export default defineComponent({
 
 <style module scoped>
 .switch {
-    @apply w-10 h-5 bg-light-blue-dark rounded-full p-0.5  flex items-center cursor-pointer;
+    @apply w-10 h-5 bg-light-blue-dark rounded-full py-0.5 px-[0.15rem]  flex items-center cursor-pointer;
 }
 .switch--active {
     @apply bg-cyan-soft;

@@ -1,36 +1,46 @@
 <script lang="ts">
-import { computed, defineComponent, PropType, ref, useCssModule } from "vue";
+import { defineComponent, PropType, ref, useCssModule } from "vue";
 
 export default defineComponent({
     name: "VRange",
     emits: ["update:modelValue"],
     props: {
         modelValue: {
-            type: Number as PropType<number>,
+            type: [Number, String] as PropType<number | string>,
             required: true,
         },
         max: {
-            type: Number as PropType<number>,
+            type: [Number, String] as PropType<number | string>,
             default: 100,
         },
         min: {
-            type: Number as PropType<number>,
+            type: [Number, String] as PropType<number | string>,
             default: 0,
         },
         step: {
-            type: Number as PropType<number>,
+            type: [Number, String] as PropType<number | string>,
             default: 1,
         },
     },
     setup(props, { emit }) {
         const style = useCssModule();
+
         const inputRange = ref<HTMLInputElement | null>(null);
         const rangeValue = ref<string | number>(0);
+        const calculateThumbLeft = (value: string | number) => {
+            rangeValue.value =
+                ((+value - +props.min) / (+props.max - +props.min)) * 100;
+        };
+        calculateThumbLeft(props.modelValue);
         const handleInput = (event: InputEvent) => {
-            console.log(event);
-            if (event.target)
-                rangeValue.value = (event.target as HTMLInputElement).value;
-            emit("update:modelValue", rangeValue.value);
+            let value;
+            if (event.target) {
+                value = (event.target as HTMLInputElement).value;
+                calculateThumbLeft(value);
+                const elm = event.target as HTMLInputElement;
+                elm.style.background = `linear-gradient(to right, var(--strong-cyan) 0%, var(--strong-cyan) ${rangeValue.value}%, var(--light-gray-blue-2) ${rangeValue.value}%, var(--light-gray-blue-2) 100%)`;
+            }
+            emit("update:modelValue", value);
         };
         return {
             style,
@@ -52,12 +62,13 @@ export default defineComponent({
             :class="style.input__range"
             @input="handleInput"
             ref="inputRange"
+            :value="modelValue"
         />
         <div :class="style.range">
             <div
                 :class="style.range__thumb"
                 :style="{
-                    left: `${+rangeValue / 100 * 0.01}%`,
+                    left: `${+rangeValue}%`,
                 }"
             ></div>
         </div>
@@ -69,15 +80,14 @@ export default defineComponent({
     @apply relative;
 }
 .input__range {
-    @apply w-full h-2 absolute top-0 left-0 z-50 bg-light-blue-light focus:outline-none rounded-full;
+    @apply w-full h-2 absolute top-0 left-0 z-[3] bg-light-blue-light focus:outline-none rounded-full appearance-none;
 }
 .input__range::-webkit-slider-thumb {
-    @apply w-12 h-12 cursor-pointer z-[3] relative;
-}
-.range {
-    @apply w-full h-2 bg-light-blue-light rounded-full absolute top-0 left-0 z-[2];
-}
-.range__thumb {
-    @apply bg-cyan-strong w-8 h-8 absolute -top-3 z-[2] rounded-full;
+    background: url("@/assets/images/icon-slider.svg");
+    background-position: center;
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    box-shadow: 0px 10px 20px 0px rgba(16, 213, 194, 0.7);
+    @apply w-10 h-10 cursor-pointer  relative appearance-none bg-cyan-strong rounded-full active:cursor-[grabbing] hover:opacity-75 transition-all duration-300 ease-in-out;
 }
 </style>

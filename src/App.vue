@@ -14,7 +14,7 @@ export default defineComponent({
 
 <template>
     <div :class="style.main">
-        <div>
+        <div :class="style['main--top']">
             <h1 :class="style.page__title">Simple, traffic-based pricing</h1>
             <h4 :class="style['page__sub-title']">
                 Sign-up for our 30-day trial. No credit card required.
@@ -26,12 +26,21 @@ export default defineComponent({
 
 <style module>
 .main {
+	background : url('@/assets/images/bg-pattern.svg');
+	background-repeat: no-repeat;
+	background-size: 100% 50%;
     @apply p-8 grid place-items-center h-screen w-screen bg-pale-blue-very;
 }
+.main--top{
+	background: url('@/assets/images/pattern-circles.svg');
+	background-position: center;
+	background-repeat: no-repeat;
+	@apply min-h-[150px] flex flex-col items-center justify-center;
+}
 .page__title {
-    @apply text-4xl font-bold text-black;
+    @apply lg:text-4xl text-2xl font-bold text-black;
 }
 .page__sub-title {
-    @apply text-center mt-3 text-gray-blue font-bold;
+    @apply lg:text-base lg:w-full w-2/3 text-sm text-center mt-3 text-gray-blue font-bold;
 }
 </style>
