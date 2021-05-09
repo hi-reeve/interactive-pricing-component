@@ -18,8 +18,8 @@ export default defineComponent({
         });
         const benefit: ComputedRef<number> = computed(() => {
             return isMonthly
-                ? benefitInitial.value / 100
-                : (benefitInitial.value * 12) / 100;
+                ? benefitInitial.value / 1000
+                : (benefitInitial.value * 12) / 1000;
         });
 
         const monthText: ComputedRef<string> = computed(() => {
@@ -60,7 +60,12 @@ export default defineComponent({
                 </div>
             </div>
             <div :class="style['pricing__options']">
-                <v-range v-model="benefitInitial" :max="250000" :min="10000" />
+                <v-range
+                    v-model="benefitInitial"
+                    :max="250000"
+                    :min="10000"
+                    :step="1000"
+                />
                 <div :class="style['pricing__options--bottom']">
                     <span :class="style['pricing__options-text']">
                         Monthly Billing

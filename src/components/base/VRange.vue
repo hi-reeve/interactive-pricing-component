@@ -22,89 +22,62 @@ export default defineComponent({
             default: 1,
         },
     },
-    setup(props) {
+    setup(props, { emit }) {
         const style = useCssModule();
-        const value = ref(0);
-
-        const progressFilled = computed(() => {});
-        // const progressMax = props.max > 100 ? props.max - (props.max / 100)
-        const handleDrag = (event: DragEvent) => {
-            const elm = event.target as HTMLDivElement;
-            elm.classList.add(style["range__thumb--dragging"]);
-            if (event.offsetX > 0) {
-                if (value.value > props.max - 5) {
-                    // value.value = props.max - 5;
-                    return;
-                }
-                value.value += props.step;
-            } else {
-                if (value.value === 0) {
-                    // value.value = 0;
-                    return;
-                }
-                value.value -= props.step;
-            }
+        const inputRange = ref<HTMLInputElement | null>(null);
+        const rangeValue = ref<string | number>(0);
+        const handleInput = (event: InputEvent) => {
+            console.log(event);
+            if (event.target)
+                rangeValue.value = (event.target as HTMLInputElement).value;
+            emit("update:modelValue", rangeValue.value);
         };
-        const handleDragEnd = () => {
-            if (value.value === props.max - 5) {
-                value.value = props.max;
-            } else {
-                value.value;
-            }
-        };
-        const valueToPercent = computed(() => {
-            return value.value * 0.1;
-        });
         return {
             style,
-            handleDrag,
-            handleDragEnd,
-            value,
-            valueToPercent,
+            handleInput,
+            inputRange,
+            rangeValue,
         };
     },
 });
 </script>
 
 <template>
-    {{ valueToPercent }}
-    <div :class="style.range">
-        <div
-            :class="style.range__progress"
-            :style="{
-                width: `${value}%`,
-            }"
-        ></div>
-        <div
-            :class="style.range__thumb"
-            @drag="handleDrag"
-            @dragend="handleDragEnd"
-            :style="{
-                left: `${value === 0 ? value : value - 5}%`,
-            }"
-        >
-            <img
-                src="../../assets/images/icon-slider.svg"
-                :class="style['range__thumb-icon']"
-            />
+    <div :class="style.range__wrapper">
+        <input
+            type="range"
+            :max="max"
+            :min="min"
+            :step="step"
+            :class="style.input__range"
+            @input="handleInput"
+            ref="inputRange"
+        />
+        <div :class="style.range">
+            <div
+                :class="style.range__thumb"
+                :style="{
+                    left: `${+rangeValue / 100 * 0.01}%`,
+                }"
+            ></div>
         </div>
     </div>
 </template>
 
 <style module scoped>
-.range {
-    @apply w-full h-2 bg-light-blue-light rounded-full relative;
+.range__wrapper {
+    @apply relative;
 }
-.range__progress {
-    @apply bg-cyan-soft h-full rounded-full;
+.input__range {
+    @apply w-full h-2 absolute top-0 left-0 z-50 bg-light-blue-light focus:outline-none rounded-full;
+}
+.input__range::-webkit-slider-thumb {
+    @apply w-12 h-12 cursor-pointer z-[3] relative;
+}
+.range {
+    @apply w-full h-2 bg-light-blue-light rounded-full absolute top-0 left-0 z-[2];
 }
 .range__thumb {
-    @apply bg-cyan-strong w-8 h-8 absolute -top-3 rounded-full shadow-lg flex items-center justify-center cursor-pointer;
-}
-.range__thumb-icon {
-    @apply w-4 h-3 select-none;
-}
-.range__thumb--dragging {
-    @apply cursor-pointer;
+    @apply bg-cyan-strong w-8 h-8 absolute -top-3 z-[2] rounded-full;
 }
 </style>
