@@ -8,10 +8,9 @@ This is a solution to the [Interactive pricing component challenge on Frontend M
 		1. [The challenge](#the-challenge)
 		2. [Screenshot](#screenshot)
 		3. [Links](#links)
-	2. [My process](#my-process)
-		1. [Built with](#built-with)
-		2. [What I learned](#what-i-learned)
-	3. [Author](#author)
+		4. [Built with](#built-with)
+		5. [What I learned](#what-i-learned)
+	2. [Author](#author)
 
 ### The challenge
 
@@ -23,12 +22,12 @@ Users should be able to:
 
 ### Screenshot
 
+![](./screenshot.jpg)
 
 ### Links
 
 - Solution URL: [Github](https://github.com/zynth17/interactive-pricing-component)
-
-## My process
+- Live Site: [Live Site](https://interactive-pricing-component-one-black.vercel.app/)
 
 ### Built with
 
@@ -39,7 +38,7 @@ Users should be able to:
 
 ### What I learned
 
-I finally learn using css module and styling an input range
+I finally learn using css module and styling an input range. i really kind of having a hard time figuring the custom input range.
 
 ## Author
 
