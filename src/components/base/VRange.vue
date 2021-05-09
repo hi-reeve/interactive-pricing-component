@@ -32,7 +32,7 @@ export default defineComponent({
                 ((+value - +props.min) / (+props.max - +props.min)) * 100;
         };
         calculateThumbLeft(props.modelValue);
-        const handleInput = (event: InputEvent) => {
+        const handleInput = (event: Event) => {
             let value;
             if (event.target) {
                 value = (event.target as HTMLInputElement).value;
@@ -60,7 +60,7 @@ export default defineComponent({
             :min="min"
             :step="step"
             :class="style.input__range"
-            @input="handleInput"
+            @input="handleInput($event)"
             ref="inputRange"
             :value="modelValue"
         />
