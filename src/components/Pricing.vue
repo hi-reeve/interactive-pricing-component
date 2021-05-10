@@ -11,7 +11,7 @@ export default defineComponent({
         const benefitMonthly = ref([10, 50, 100, 500, 1000]);
         const currentPrice = ref(priceMonthly.value[0]);
         const currentBenefit = ref(benefitMonthly.value[0]);
-        const rangeModel = ref(1);
+        const rangeModel = ref(3);
         const monthText = ref<string>("monthly");
         const benefitText = ref<string>(currentBenefit.value.toString());
         const priceText = ref<string>(currentPrice.value.toString());

@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent, PropType, ref, useCssModule } from "vue";
+import { defineComponent, onMounted, PropType, ref, useCssModule } from "vue";
 
 export default defineComponent({
     name: "VRange",
@@ -30,18 +30,21 @@ export default defineComponent({
         const calculateThumbLeft = (value: string | number) => {
             rangeValue.value =
                 ((+value - +props.min) / (+props.max - +props.min)) * 100;
+            if (inputRange.value)
+                inputRange.value.style.background = `linear-gradient(to right, var(--strong-cyan) 0%, var(--strong-cyan) ${rangeValue.value}%, var(--light-gray-blue-2) ${rangeValue.value}%, var(--light-gray-blue-2) 100%)`;
         };
-        calculateThumbLeft(props.modelValue);
+
         const handleInput = (event: Event) => {
             let value;
             if (event.target) {
                 value = (event.target as HTMLInputElement).value;
                 calculateThumbLeft(value);
-                const elm = event.target as HTMLInputElement;
-                elm.style.background = `linear-gradient(to right, var(--strong-cyan) 0%, var(--strong-cyan) ${rangeValue.value}%, var(--light-gray-blue-2) ${rangeValue.value}%, var(--light-gray-blue-2) 100%)`;
             }
             emit("update:modelValue", value);
         };
+        onMounted(() => {
+            calculateThumbLeft(props.modelValue);
+        });
         return {
             style,
             handleInput,
@@ -63,9 +66,9 @@ export default defineComponent({
             @input="handleInput($event)"
             ref="inputRange"
             :value="modelValue"
-			aria-label=""
-			title="pricing"
-			aria-labelledby=""
+            aria-label=""
+            title="pricing"
+            aria-labelledby=""
         />
         <div :class="style.range">
             <div
