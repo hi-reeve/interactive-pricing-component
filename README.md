@@ -33,7 +33,7 @@ Users should be able to:
 
 - [Vite js](https://vitejs.dev/) - Front-end build tool
 - [Vue 3](https://v3.vuejs.org/) - JS library
-- [Typescript](https://www.typescriptlang.org/) - React framework
+- [Typescript](https://www.typescriptlang.org/)
 - [Tailwindcss](https://tailwindcss.com/) - For styles
 
 ### What I learned
