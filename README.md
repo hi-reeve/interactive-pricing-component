@@ -26,7 +26,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Github](https://github.com/zynth17/interactive-pricing-component)
+- Solution URL: [Frontend Mentor](https://www.frontendmentor.io/solutions/interactive-pricing-component-with-vuejs-yKaGy2Bkn)
 - Live Site: [Live Site](https://interactive-pricing-component-one-black.vercel.app/)
 
 ### Built with
