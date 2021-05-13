@@ -45,4 +45,4 @@ I finally learn using css module and styling an input range. i really kind of ha
 - Frontend Mentor - [@zynth17](https://www.frontendmentor.io/profile/zynth17)
 - Twitter - [@hi_reeve](https://twitter.com/hi_reeve)
 - Instagram - [@hi_reeve](https://www.instagram.com/hi_reeve/)
-
+- Github - [zynth17](https://github.com/zynth17)
